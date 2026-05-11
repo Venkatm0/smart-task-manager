@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Dashboard</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+    <h2>Smart Task Manager</h2>
+
+    <div>
+
+        <a href="/all_tasks">Get All Tasks</a>
+
+        <a href="/add_task_page">Add Task</a>
+
+        <a href="/logout">Logout</a>
+
+    </div>
+</div>
+
+<div class="container">
+
+    <h1>Welcome {{ username }}</h1>
+
+    <p>
+        Manage your daily work efficiently using the
+        Smart Task Management System.
+    </p>
+
+    <div class="analytics">
+
+        <h2>Analytics Summary</h2>
+
+        <p>Total Tasks: {{ total_tasks }}</p>
+
+        <p>Completed Tasks: {{ completed_tasks }}</p>
+
+        <p>Pending Tasks: {{ pending_tasks }}</p>
+
+        <p>Completion Percentage:
+            {{ completion_percentage }}%
+        </p>
+
+    </div>
+
+    <h2>Your Tasks</h2>
+
+    {% for task in tasks %}
+
+    <div class="task">
+
+        <h3>{{ task.title }}</h3>
+
+        <p>{{ task.description }}</p>
+
+        <p><b>Priority:</b> {{ task.priority }}</p>
+
+        <p><b>Status:</b> {{ task.status }}</p>
+
+        <p><b>Created:</b> {{ task.created_date }}</p>
+
+        <a href="/update_task/{{ task.id }}">Update</a>
+
+        |
+
+        <a href="/delete_task/{{ task.id }}">Delete</a>
+
+    </div>
+
+    {% endfor %}
+
+    <br><br>
+
+    <center>
+
+        <a href="/add_task_page">
+
+            <button>Add New Task</button>
+
+        </a>
+
+    </center>
+
+</div>
+
+</body>
+</html>

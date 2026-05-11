@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>All Tasks</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="navbar">
+
+    <h2>Smart Task Manager</h2>
+
+    <div>
+
+        <a href="/dashboard">Dashboard</a>
+
+        <a href="/add_task_page">Add Task</a>
+
+        <a href="/logout">Logout</a>
+
+    </div>
+
+</div>
+
+<div class="container">
+
+    <h1>All Tasks</h1>
+
+    <p>
+        Below are all your created tasks.
+    </p>
+
+    {% for task in tasks %}
+
+    <div class="task">
+
+        <h3>{{ task.title }}</h3>
+
+        <p>{{ task.description }}</p>
+
+        <p><b>Priority:</b> {{ task.priority }}</p>
+
+        <p><b>Status:</b> {{ task.status }}</p>
+
+        <p><b>Created:</b> {{ task.created_date }}</p>
+
+        <a href="/update_task/{{ task.id }}">Update</a>
+
+        |
+
+        <a href="/delete_task/{{ task.id }}">Delete</a>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+</body>
+</html>
