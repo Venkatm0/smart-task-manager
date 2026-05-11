@@ -1,3 +1,4 @@
+from flask_socketio import SocketIO
 from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -17,6 +18,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:2039@localhost/ta
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+socketio = SocketIO(app)
 
 # ================= MODELS ================= #
 
@@ -235,7 +237,12 @@ def add_task():
 
     db.session.add(new_task)
 
-    db.session.commit()
+    socketio.emit(
+        'new_task',
+        {
+            'message': 'New Task Added Successfully'
+        }
+    )
 
     return redirect('/dashboard')
 
@@ -291,4 +298,4 @@ def logout():
 
 if __name__ == '__main__':
 
-    app.run(debug=True)
+    socketio.run(app, debug=True)

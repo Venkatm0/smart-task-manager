@@ -90,6 +90,18 @@
     </center>
 
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.2/socket.io.js"></script>
 
+<script>
+
+    const socket = io();
+
+    socket.on('new_task', function(data){
+
+        alert(data.message);
+
+    });
+
+</script>
 </body>
 </html>
